@@ -28,7 +28,7 @@ h3,
 h4,
 h5,
 h6 {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     color: rgb(9 37 64);
 
 }
@@ -68,7 +68,8 @@ h3,
 
 h4,
 .h4 {
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 700;
 
 }
 
@@ -265,7 +266,7 @@ body {
     transform: translateX(-50%) translateY(-50%);
     width: 700px;
     height: 700px;
-    background-color: #dc3545;
+    background-color: #fe4543;
     border-radius: 4px;
     touch-action: none;
 }
@@ -277,7 +278,7 @@ body {
     transform: translateX(-50%) translateY(-50%);
     width: 250px;
     height: 250px;
-    background-color: #02cd2e;
+    background-color: #01c851 ;
     z-index: 3;
     border-radius: 4px;
     touch-action: none;
@@ -304,7 +305,7 @@ body {
     transform: translateX(-50%) translateY(-50%);
     width: 550px;
     height: 550px;
-    background-color: #ffc107;
+    background-color: #ffbb34;
     border-radius: 4px;
     z-index: 1;
     touch-action: none;
@@ -339,7 +340,7 @@ body {
 
 .pinterLocation {
     position: absolute;
-    right: 10px;
+    left: 10px;
     top: 80px;
     background-color: #0253cd;
     color: #fff;
@@ -350,7 +351,23 @@ body {
     font-weight: 600;
 }
 
-
+.formBox{
+    border-radius: 6px 0 0 6px;
+    padding: 20px;
+    position: absolute;
+    right: 0;
+    top: 0px;
+    bottom: 0;
+    box-shadow: 0px 0px 26px -11px rgba(0, 0, 0, 0.3);
+    width: 230px;
+}
+.relationBlock{
+    padding: 15px;
+    border-radius: 12px;
+    background-color: #f6f6f6;
+    color: #000;
+    font-size: 13px;
+}
 @media (max-width: 1199.98px) {
     
 }
