@@ -1,95 +1,149 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+
+'use client'
+
+import { useState } from "react"
+
 
 export default function Home() {
+
+  const [pointer, setPointer] = useState({
+    persone: 'Sumanta',
+    x: '',
+    y: '',
+    relation: ''
+  })
+
+
+  if (typeof document !== 'undefined') {
+
+    const dragElement = document.querySelector('.dragBox')
+    const container = document.querySelector('.mainContainer')
+
+
+
+    const circle1 = document.querySelector('.circle1')
+    const circle2 = document.querySelector('.circle2')
+    const circle3 = document.querySelector('.circle3')
+
+
+    const moveFunction = (e) => {
+      let mousePos = { x: e.clientX, y: e.clientY };
+      if (
+        // left
+        mousePos.x > (container.offsetLeft - (container.clientWidth / 2)) &
+        // right
+        mousePos.x < (container.offsetLeft + ((container.clientWidth / 2) - dragElement.clientHeight)) &
+        // top
+        mousePos.y > (container.offsetTop - (container.clientHeight / 2)) &
+        // bottom
+        mousePos.y < (container.offsetTop + ((container.clientWidth / 2) - dragElement.clientHeight))
+      ) {
+        dragElement.style.left = `${mousePos.x}px`
+        dragElement.style.top = `${mousePos.y}px`
+        setPointer({
+          ...pointer,
+          x: dragElement.style.left,
+          y: dragElement.style.top
+        })
+      };
+
+      // track circle 1
+
+      if (
+        mousePos.x < (container.offsetLeft + (circle3.clientWidth / 2)) &
+        mousePos.x > (container.offsetLeft - (circle3.clientWidth / 2)) &
+        mousePos.y > (container.offsetTop - (circle3.clientHeight / 2)) &
+        mousePos.y < (container.offsetTop + (circle3.clientHeight / 2))
+      ) {
+        if (
+          mousePos.x < (container.offsetLeft + (circle2.clientWidth / 2)) &
+          mousePos.x > (container.offsetLeft - (circle2.clientWidth / 2)) &
+          mousePos.y > (container.offsetTop - (circle2.clientHeight / 2)) &
+          mousePos.y < (container.offsetTop + (circle2.clientHeight / 2))
+        ) {
+          if (
+            mousePos.x < (container.offsetLeft + (circle1.clientWidth / 2)) &
+            mousePos.x > (container.offsetLeft - (circle1.clientWidth / 2)) &
+            mousePos.y > (container.offsetTop - (circle1.clientHeight / 2)) &
+            mousePos.y < (container.offsetTop + (circle1.clientHeight / 2))
+          ) {
+            setPointer({
+              ...pointer,
+              x: dragElement.style.left,
+              y: dragElement.style.top,
+              relation: "Deep"
+            })
+
+          }
+          else {
+            setPointer({
+              ...pointer,
+              x: dragElement.style.left,
+              y: dragElement.style.top,
+              relation: "Hi/Hello"
+            })
+
+          }
+
+        }
+        else {
+          setPointer({
+            ...pointer,
+            x: dragElement.style.left,
+            y: dragElement.style.top,
+            relation: "Not Friend"
+          })
+
+        }
+
+      }
+      else {
+        setPointer({
+          ...pointer,
+          x: dragElement.style.left,
+          y: dragElement.style.top,
+          relation: "Enemy"
+        })
+      }
+    }
+
+    dragElement.addEventListener('pointerdown', () => {
+      window.addEventListener('pointermove', moveFunction)
+      console.log('down');
+    })
+    dragElement.addEventListener('pointerup', () => {
+      window.removeEventListener('pointermove', moveFunction)
+      console.log('up');
+    })
+
+
+
+
+  }
+
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <>
+      <div className="mainContainer">
+        <div className="circle1" data-zone="Safe"></div>
+        <div className="circle2" data-zone="Medium"></div>
+        <div className="circle3" data-zone="Warning"></div>
       </div>
+      <div className="dragBox"></div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+
+      <div className="pinterLocation">
+        {pointer != null ?
+          <>
+            <div>
+              Name: {pointer.persone}<br />
+              Relation: {pointer.relation}<br />
+              X: {pointer.x}<br />
+              Y: {pointer.y}
+            </div>
+          </>
+          : null}
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </>
   );
 }
