@@ -256,7 +256,7 @@ hr {
 
 
 body {
-    touch-action: none;
+    /* touch-action: none; */
 }
 
 .mainContainer {
@@ -268,7 +268,7 @@ body {
     height: 700px;
     background-color: #fe4543;
     border-radius: 4px;
-    touch-action: none;
+    /* touch-action: none; */
 }
 
 .circle1 {
@@ -281,7 +281,7 @@ body {
     background-color: #01c851 ;
     z-index: 3;
     border-radius: 4px;
-    touch-action: none;
+    /* touch-action: none; */
 }
 
 .circle2 {
@@ -295,7 +295,7 @@ body {
 
     z-index: 2;
     border-radius: 4px;
-    touch-action: none;
+    /* touch-action: none; */
 }
 
 .circle3 {
@@ -308,7 +308,7 @@ body {
     background-color: #ffbb34;
     border-radius: 4px;
     z-index: 1;
-    touch-action: none;
+    /* touch-action: none; */
 }
 
 .dragBox {

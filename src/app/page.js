@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react"
 
 export default function Home() {
 
-  const [pointer, setPointer] = useState(null)
+  const [pointer, setPointer] = useState([])
   const [name, setName] = useState(null)
   const [data, setData] = useState(null)
 
@@ -15,9 +15,11 @@ export default function Home() {
   // form submission
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(name);
+
     setPointer(
       [
+        ...pointer,
+
         {
           persone: name,
           x: '',
@@ -43,107 +45,160 @@ export default function Home() {
   const circle1 = useRef(0);
   const circle2 = useRef(0);
   const circle3 = useRef(0);
-  console.log(container.current.offsetLeft);
-
-
-  
-  // const container1 = document.querySelector('.mainContainer')
-  // const circle1 = document.querySelector('.circle1')
-  // const circle2 = document.querySelector('.circle2')
-  // const circle3 = document.querySelector('.circle3')
-  // console.log(container1);
 
 
 
 
   const moveFunction = (e) => {
     let target = e.target;
-    alert('working')
-    // const runFunction = () => {
-    //   let mousePos = { x: e.clientX, y: e.clientY };
-    //   if (
-    //     mousePos.x > (container.offsetLeft - (container.clientWidth / 2)) &
-    //     mousePos.x < (container.offsetLeft + ((container.clientWidth / 2) - target.clientHeight)) &
-    //     mousePos.y > (container.offsetTop - (container.clientHeight / 2)) &
-    //     mousePos.y < (container.offsetTop + ((container.clientWidth / 2) - target.clientHeight))
-    //   ) {
-    //     target.style.left = `${mousePos.x}px`
-    //     target.style.top = `${mousePos.y}px`
-    //     setPointer({
-    //       ...pointer,
-    //       x: target.style.left,
-    //       y: target.style.top
-    //     })
-    //   };
 
-    //   if (
-    //     mousePos.x < (container.offsetLeft + (circle3.clientWidth / 2)) &
-    //     mousePos.x > (container.offsetLeft - (circle3.clientWidth / 2)) &
-    //     mousePos.y > (container.offsetTop - (circle3.clientHeight / 2)) &
-    //     mousePos.y < (container.offsetTop + (circle3.clientHeight / 2))
-    //   ) {
-    //     if (
-    //       mousePos.x < (container.offsetLeft + (circle2.clientWidth / 2)) &
-    //       mousePos.x > (container.offsetLeft - (circle2.clientWidth / 2)) &
-    //       mousePos.y > (container.offsetTop - (circle2.clientHeight / 2)) &
-    //       mousePos.y < (container.offsetTop + (circle2.clientHeight / 2))
-    //     ) {
-    //       if (
-    //         mousePos.x < (container.offsetLeft + (circle1.clientWidth / 2)) &
-    //         mousePos.x > (container.offsetLeft - (circle1.clientWidth / 2)) &
-    //         mousePos.y > (container.offsetTop - (circle1.clientHeight / 2)) &
-    //         mousePos.y < (container.offsetTop + (circle1.clientHeight / 2))
-    //       ) {
-    //         setPointer({
-    //           ...pointer,
-    //           x: target.style.left,
-    //           y: target.style.top,
-    //           relation: "Deep"
-    //         })
+    const runFunction = (e) => {
+      let mousePos = { x: e.clientX, y: e.clientY };
+      if (
+        mousePos.x > (container.current.offsetLeft - (container.current.clientWidth / 2)) &
+        mousePos.x < (container.current.offsetLeft + ((container.current.clientWidth / 2) - target.clientHeight)) &
+        mousePos.y > (container.current.offsetTop - (container.current.clientHeight / 2)) &
+        mousePos.y < (container.current.offsetTop + ((container.current.clientWidth / 2) - target.clientHeight))
+      ) {
+        target.style.left = `${mousePos.x}px`
+        target.style.top = `${mousePos.y}px`
 
-    //       }
-    //       else {
-    //         setPointer({
-    //           ...pointer,
-    //           x: target.style.left,
-    //           y: target.style.top,
-    //           relation: "Hi/Hello"
-    //         })
 
-    //       }
+        let oldData = pointer.filter((item) => (
+          item.persone !== target.getAttribute('data-id')
+        ))
 
-    //     }
-    //     else {
-    //       setPointer({
-    //         ...pointer,
-    //         x: target.style.left,
-    //         y: target.style.top,
-    //         relation: "Not Friend"
-    //       })
 
-    //     }
+        setPointer(
+          [
+            ...oldData,
+            {
+              persone: name,
+              x: target.style.left,
+              y: target.style.top,
+              relation: ''
+            }
+          ]
+        )
+      };
 
-    //   }
-    //   else {
-    //     setPointer({
-    //       ...pointer,
-    //       x: target.style.left,
-    //       y: target.style.top,
-    //       relation: "Enemy"
-    //     })
-    //   }
-    // }
+      if (
+        mousePos.x < (container.current.offsetLeft + (circle3.current.clientWidth / 2)) &
+        mousePos.x > (container.current.offsetLeft - (circle3.current.clientWidth / 2)) &
+        mousePos.y > (container.current.offsetTop - (circle3.current.clientHeight / 2)) &
+        mousePos.y < (container.current.offsetTop + (circle3.current.clientHeight / 2))
+      ) {
+        if (
+          mousePos.x < (container.current.offsetLeft + (circle2.current.clientWidth / 2)) &
+          mousePos.x > (container.current.offsetLeft - (circle2.current.clientWidth / 2)) &
+          mousePos.y > (container.current.offsetTop - (circle2.current.clientHeight / 2)) &
+          mousePos.y < (container.current.offsetTop + (circle2.current.clientHeight / 2))
+        ) {
+          if (
+            mousePos.x < (container.current.offsetLeft + (circle1.current.clientWidth / 2)) &
+            mousePos.x > (container.current.offsetLeft - (circle1.current.clientWidth / 2)) &
+            mousePos.y > (container.current.offsetTop - (circle1.current.clientHeight / 2)) &
+            mousePos.y < (container.current.offsetTop + (circle1.current.clientHeight / 2))
+          ) {
+            let oldData = pointer.filter((item) => (
+              item.persone !== target.getAttribute('data-id')
+            ))
+            setPointer(
+              [
+                ...oldData,
+                {
+                  persone: name,
+                  x: target.style.left,
+                  y: target.style.top,
+                  relation: "Deep"
+                }
+              ]
+            )
 
-    // window.addEventListener('pointermove', runFunction)
+
+          }
+          else {
+            let oldData = pointer.filter((item) => (
+              item.persone !== target.getAttribute('data-id')
+            ))
+            setPointer(
+              [
+                ...oldData,
+                {
+                  persone: name,
+                  x: target.style.left,
+                  y: target.style.top,
+                  relation: "Hi/Hello"
+                }
+              ]
+            )
+
+
+          }
+
+        }
+        else {
+          let oldData = pointer.filter((item) => (
+            item.persone !== target.getAttribute('data-id')
+          ))
+          setPointer(
+            [
+              ...oldData,
+              {
+                persone: name,
+                x: target.style.left,
+                y: target.style.top,
+                relation: "Not Friend"
+              }
+            ]
+          )
+
+
+
+        }
+
+      }
+      else {
+        let oldData = pointer.filter((item) => (
+          item.persone !== target.getAttribute('data-id')
+        ))
+        setPointer(
+          [
+            ...oldData,
+            {
+              persone: name,
+              x: target.style.left,
+              y: target.style.top,
+              relation: "Enemy"
+            }
+          ]
+        )
+
+
+      }
+
+      window.addEventListener('pointerup', () => {
+        window.removeEventListener('pointermove', runFunction)
+      })
+    }
+
+
+
+    window.addEventListener('pointermove', runFunction)
+
+
   }
+
+
+
 
 
   return (
     <>
-    
-  
-  
-  
+
+
+
+
       <div className="mainContainer" ref={container}>
         <div className="circle1" data-zone="Safe" ref={circle1}></div>
         <div className="circle2" data-zone="Medium" ref={circle2}></div>
@@ -152,7 +207,7 @@ export default function Home() {
 
       {data !== null ?
         data.map((item, index) => (
-          <div key={index} data-id={item.persone} className="dragBox" onPointerDown={moveFunction}></div>
+          <div key={index} data-id={item.persone} className="dragBox" onPointerDown={moveFunction} ></div>
         ))
         : null}
 
