@@ -367,6 +367,17 @@ body {
     background-color: #f6f6f6;
     color: #000;
     font-size: 13px;
+    margin-bottom: 5px;
+}
+.tabContainer{
+    display: none;
+}
+.tabLinks li{
+    font-weight: 600;
+    cursor: pointer;
+}
+.tabLinks li.active{
+    color: #000;
 }
 @media (max-width: 1199.98px) {
     
