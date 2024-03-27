@@ -124,7 +124,7 @@ export default function UpdateContact
     return (
         <>
             {/* onPointerDown={moveFunction} */}
-            <div data-id={old_id} className="dragBox" style={{left: positionX, top: positionY}} title={relation} onPointerDown={moveFunction}></div>
+            <div data-id={old_id} className="dragBox" style={{left: positionX, top: positionY}} title={old_name} onPointerDown={moveFunction}></div>
 
         </>
     )

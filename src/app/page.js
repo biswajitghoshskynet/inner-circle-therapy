@@ -28,13 +28,11 @@ export default function Home() {
   const circle3 = useRef(0);
 
 
-
-
-
   useEffect(() => {
     setHasMounted(true);
     let id = localStorage.getItem('userid')
     getData()
+    tabFunction()
     setOwner(id)
   }, [reload]);
 
@@ -71,158 +69,37 @@ export default function Home() {
 
 
 
-  // const moveFunction = (e) => {
-  //   let target = e.target;
+  const tabFunction = () => {
+    if (typeof window !== "undefined") {
+      const tabLink = document.querySelectorAll('.tabLinks li')
+      const tabContent = document.querySelectorAll('.tabContainer')
+      tabLink.forEach(item => {
+        
+        item.addEventListener('click', (e) => {
+         
+         
+          tabContent.forEach(content => {
+            if (content.getAttribute('id') === item.getAttribute('data-id')) {
+              content.style.display = "block"
+            }
+            else {
+              content.style.display = "none"
+            }
+          });
+          
 
-  //   const runFunction = (e) => {
-  //     let mousePos = { x: e.clientX, y: e.clientY };
-  //     if (
-  //       mousePos.x > (container.current.offsetLeft - (container.current.clientWidth / 2)) &
-  //       mousePos.x < (container.current.offsetLeft + ((container.current.clientWidth / 2) - target.clientHeight)) &
-  //       mousePos.y > (container.current.offsetTop - (container.current.clientHeight / 2)) &
-  //       mousePos.y < (container.current.offsetTop + ((container.current.clientWidth / 2) - target.clientHeight))
-  //     ) {
-  //       target.style.left = `${mousePos.x}px`
-  //       target.style.top = `${mousePos.y}px`
+          tabLink.forEach(activeLink => {
+            activeLink.className=''
+          })
+          item.className='active'
+        })
+      });
+    }
 
-  //       let allData = pointer
-
-  //       allData.forEach(item => {
-  //         if (item.id === target.getAttribute('data-id')) {
-  //           item.x = target.style.left,
-  //             item.y = target.style.top
-  //         }
-  //       });
-
-
-
-  //     };
-
-  //     if (
-  //       mousePos.x < (container.current.offsetLeft + (circle3.current.clientWidth / 2)) &
-  //       mousePos.x > (container.current.offsetLeft - (circle3.current.clientWidth / 2)) &
-  //       mousePos.y > (container.current.offsetTop - (circle3.current.clientHeight / 2)) &
-  //       mousePos.y < (container.current.offsetTop + (circle3.current.clientHeight / 2))
-  //     ) {
-  //       if (
-  //         mousePos.x < (container.current.offsetLeft + (circle2.current.clientWidth / 2)) &
-  //         mousePos.x > (container.current.offsetLeft - (circle2.current.clientWidth / 2)) &
-  //         mousePos.y > (container.current.offsetTop - (circle2.current.clientHeight / 2)) &
-  //         mousePos.y < (container.current.offsetTop + (circle2.current.clientHeight / 2))
-  //       ) {
-  //         if (
-  //           mousePos.x < (container.current.offsetLeft + (circle1.current.clientWidth / 2)) &
-  //           mousePos.x > (container.current.offsetLeft - (circle1.current.clientWidth / 2)) &
-  //           mousePos.y > (container.current.offsetTop - (circle1.current.clientHeight / 2)) &
-  //           mousePos.y < (container.current.offsetTop + (circle1.current.clientHeight / 2))
-  //         ) {
-
-  //           let allData = pointer
-  //           allData.forEach(item => {
-  //             if (item.id === target.getAttribute('data-id')) {
-  //               item.x = target.style.left,
-  //                 item.y = target.style.top,
-  //                 item.relation = "Friend"
-  //             }
-  //           });
-  //           setPointer(allData)
-  //           setReload(mousePos.x + mousePos.y)
-  //         }
-  //         else {
-  //           let allData = pointer
-  //           allData.forEach(item => {
-  //             if (item.id === target.getAttribute('data-id')) {
-  //               item.x = target.style.left,
-  //                 item.y = target.style.top,
-  //                 item.relation = "Hi/Hello"
-  //             }
-  //           });
-  //           setPointer(allData)
-  //           setReload(mousePos.x)
-
-
-  //         }
-
-  //       }
-  //       else {
-  //         let allData = pointer
-  //         allData.forEach(item => {
-  //           if (item.id === target.getAttribute('data-id')) {
-  //             item.x = target.style.left,
-  //               item.y = target.style.top,
-  //               item.relation = "Not Friend"
-  //           }
-  //         });
-  //         setPointer(allData)
-  //         setReload(mousePos.x + mousePos.y)
-  //       }
-
-  //     }
-  //     else {
-  //       let allData = pointer
-  //       allData.forEach(item => {
-  //         if (item.id === target.getAttribute('data-id')) {
-  //           item.x = target.style.left,
-  //             item.y = target.style.top,
-  //             item.relation = "Enemy"
-  //         }
-  //       });
-  //       setPointer(allData)
-  //       setReload(mousePos.x + mousePos.y)
-  //     }
-
-  //     window.addEventListener('pointerup', () => {
-  //       window.removeEventListener('pointermove', runFunction)
-  //     })
-  //   }
+  }
 
 
 
-  //   window.addEventListener('pointermove', runFunction)
-
-
-  // }
-
-
-
-
-
-
-
-
-
-
-  // const tabFunction = () => {
-  //   if (typeof window !== "undefined") {
-  //     const tabLink = document.querySelectorAll('.tabLinks li')
-  //     const tabContent = document.querySelectorAll('.tabContainer')
-  //     tabLink.forEach(item => {
-  //       item.addEventListener('click', () => {
-  //         tabContent.forEach(content => {
-  //           if (content.getAttribute('id') === item.getAttribute('data-id')) {
-  //             content.style.display = "block"
-  //           }
-  //           else {
-  //             content.style.display = "none"
-  //           }
-  //         });
-  //       })
-  //     });
-  //   }
-
-  // }
-
-
-
-  // const handleTab = (e) => {
-  //   e.target.style.color = '#000'
-  //   if (e.target.getAttribute('data-id') === 'tab1') {
-  //     tab1.current.style.display = 'block'
-  //   }
-  //   if (e.target.getAttribute('data-id') === 'tab2') {
-  //     tab2.current.style.display = 'block'
-  //   }
-  // }
 
 
 
@@ -250,7 +127,7 @@ export default function Home() {
             old_positionY={item.positionY}
             old_relation={item.relation}
             old_id={item._id}
-            setReload={setReload} 
+            setReload={setReload}
             reload={reload}
             container={container}
             circle1={circle1}
@@ -283,62 +160,40 @@ export default function Home() {
         </form>
         <div className="dataList">
           <h4>Relation List</h4>
-          {data?.success === true ?
-            data.data.map((item, index) => (
-              <div key={index} className="relationBlock position-relative">
-                {item.name}<br />
-                {item.phone}<br />
-                {item.email}<br />
-                Relation: <strong>{item.relation}</strong> <br />
-                X: {item.positionX}<br />
-                y: {item.positionY}<br />
-                {/* X:({item.x}) ,
-                Y:({item.y})<br /> */}
-                <small>ID: {item._id}</small>
-                <div className="deleteBtn"><DeleteContact id={item._id} setReload={setReload} reload={reload} /></div>
-              </div>
-            ))
-            : null}
-          {/* <div className="tabBox" >
+
+          <div className="tabBox" >
             <ul className="tabLinks d-flex gap-3 mb-1" >
-              <li data-id="tab1">All</li>
+              <li data-id="tab1" className="active">All</li>
               <li data-id="tab2">Friends</li>
             </ul>
-            <div className="tabContainer" id="tab1" >
-              <p>All Mwmber</p>
-              {data !== null ?
-                data.map((item, index) => (
-                  <div key={index} className="relationBlock">
-
-                    {item.persone}<br />
+            <div className="tabContainer" id="tab1" style={{display: 'block'}} >
+              {data?.success === true ?
+                data.data.map((item, index) => (
+                  <div key={index} className="relationBlock position-relative">
+                    {item.name}<br />
                     {item.phone}<br />
                     {item.email}<br />
-                    Relation: <strong>{item.relation}</strong> <br />
-                    X:({item.x}) ,
-                    Y:({item.y})<br />
-                    <small>ID: {item.id}</small>
+                    Relation: <strong>{item.relation}</strong>
+                    <div className="deleteBtn"><DeleteContact id={item._id} setReload={setReload} reload={reload} /></div>
                   </div>
                 ))
-                : '0 relative'}
+                : '0 Member'}
             </div>
             <div className="tabContainer" id="tab2">
-              <p>All Friend</p>
-              {data !== null ?
-                data.map((item, index) => (
-                  <div key={index} className="relationBlock">
 
-                    {item.persone}<br />
+              {data?.success === true ?
+                data.data.filter((contact)=>(contact.relation === 'Friend')).map((item, index) => (
+                  <div key={index} className="relationBlock position-relative">
+                    {item.name}<br />
                     {item.phone}<br />
                     {item.email}<br />
-                    Relation: <strong>{item.relation}</strong> <br />
-                    X:({item.x}) ,
-                    Y:({item.y})<br />
-                    <small>ID: {item.id}</small>
+                    Relation: <strong>{item.relation}</strong>
+                    <div className="deleteBtn"><DeleteContact id={item._id} setReload={setReload} reload={reload} /></div>
                   </div>
                 ))
                 : '0 friend'}
             </div>
-          </div> */}
+          </div>
 
         </div>
 

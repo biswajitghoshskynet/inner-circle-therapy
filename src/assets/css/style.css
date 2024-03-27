@@ -154,6 +154,9 @@ hr {
     font-size: 13px;
     padding: 10px 15px;
     border-color: #dce9ee;
+    -webkit-appearance: auto;
+    -moz-appearance: auto;
+    appearance: auto;
 
 }
 
@@ -362,13 +365,15 @@ body {
     bottom: 0;
     box-shadow: 0px 0px 26px -11px rgba(0, 0, 0, 0.3);
     width: 230px;
+    background-color: #fff;
+    overflow-y: scroll;
 }
 .relationBlock{
     padding: 15px;
     border-radius: 12px;
     background-color: #f6f6f6;
     color: #000;
-    font-size: 13px;
+    font-size: 11.5px;
     margin-bottom: 5px;
 }
 .tabContainer{
@@ -379,7 +384,7 @@ body {
     cursor: pointer;
 }
 .tabLinks li.active{
-    color: #000;
+    color: #01c851;
 }
 .loginBox{
     box-shadow: 0px 0px 26px -11px rgba(0, 0, 0, 0.3);
