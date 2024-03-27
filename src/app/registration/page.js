@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Link from "next/link";
 
 export default function Page() {
     const [hasMounted, setHasMounted] = useState(false);
@@ -51,15 +52,18 @@ export default function Page() {
                         <div className='col-sm-8 col-md-7 col-lg-5 col-xl-4'>
                             <div className='loginBox'>
                                 <h1 className="text-center mb-3 h2">Signup</h1>
-                                <form onSubmit={handleSubmit}>
-                                    <div className='mb-1'><input type="text" className='form-control' id='name' name='name' placeholder="Name" onChange={(e)=>{setName(e.target.value)}} required /></div>
-                                    <div className='mb-1'><input type="email" className='form-control' id='email' name='email' placeholder="Email" onChange={(e)=>{setEmail(e.target.value)}} required /></div>
-                                    <div className='mb-3'><input type="text" className='form-control' id='password' name='password' placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}} required /></div>
+                                <form onSubmit={handleSubmit} className="mb-3">
+                                    <div className='mb-1'><input type="text" className='form-control' id='name' name='name' placeholder="Name" onChange={(e) => { setName(e.target.value) }} required /></div>
+                                    <div className='mb-1'><input type="email" className='form-control' id='email' name='email' placeholder="Email" onChange={(e) => { setEmail(e.target.value) }} required /></div>
+                                    <div className='mb-3'><input type="text" className='form-control' id='password' name='password' placeholder="Password" onChange={(e) => { setPassword(e.target.value) }} required /></div>
                                     <div className="d-grid">
                                         <button type="submit" className="btn btn-primary">Submit</button>
                                     </div>
 
                                 </form>
+                                <p className="mt-10 text-center text-sm text-gray-500">
+                                   Already have account? <Link href="/login" className="text-primary">Sign In</Link>
+                                </p>
                             </div>
                         </div>
                     </div>
