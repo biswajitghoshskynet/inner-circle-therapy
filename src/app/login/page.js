@@ -49,7 +49,7 @@ export default function Page() {
             setToken(data.token)
             setTimeout(() => {
                 router.push('/login')
-            }, 500);
+            }, 1000);
         }
 
     }
