@@ -193,9 +193,9 @@ export default function Home() {
                   <div key={index} className="relationBlock position-relative">
                     {item.name}<br />
                     {item.phone}<br />
-                    {item.email}<br />
-                    X: {item.positionX}<br />
-                    Y: {item.positionY}<br />
+                    {item.email !== ''?<>{item.email}<br /></>:null}
+                    {/* X: {item.positionX}<br />
+                    Y: {item.positionY}<br /> */}
                     Relation: <strong>{item.relation}</strong>
                     <div className="deleteBtn"><DeleteContact id={item._id} setReload={setReload} reload={reload} /></div>
                   </div>
@@ -209,9 +209,10 @@ export default function Home() {
                   <div key={index} className="relationBlock position-relative">
                     {item.name}<br />
                     {item.phone}<br />
-                    {item.email}<br />
-                    X: {item.positionX}<br />
-                    Y: {item.positionY}<br />
+                    {item.email !== ''?<>{item.email}<br /></>:null}
+                    
+                    {/* X: {item.positionX}<br />
+                    Y: {item.positionY}<br /> */}
                     Relation: <strong>{item.relation}</strong>
                     <div className="deleteBtn"><DeleteContact id={item._id} setReload={setReload} reload={reload} /></div>
                   </div>
