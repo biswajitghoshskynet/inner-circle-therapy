@@ -10,14 +10,14 @@ import { setToken } from '../../lib/sitecookies';
 
 
 
+
 export default function Page() {
 
     const [mounted, setMounted] = useState(false);
 
-
     useEffect(() => {
         setMounted(true)
-
+     
     }, [])
 
     const router = useRouter()
@@ -41,15 +41,15 @@ export default function Page() {
             if (data?.msg) {
                 toast.error(data.msg);
             }
-
-
         }
-        else if (data.success === true) {
+        else {
             localStorage.setItem('userid', data.id);
             setEmail('')
             setPassword('')
             setToken(data.token)
-            router.push('/')
+            setTimeout(() => {
+                router.push('/')
+            }, 500);
         }
 
     }
