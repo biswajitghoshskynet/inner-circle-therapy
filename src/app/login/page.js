@@ -46,14 +46,10 @@ export default function Page() {
         }
         else if (data.success === true) {
             localStorage.setItem('userid', data.id);
-            toast.success(data.msg);
             setEmail('')
             setPassword('')
             setToken(data.token)
-
-            setTimeout(() => {
-                router.push('/')
-            }, 500)
+            router.push('/')
         }
 
     }

@@ -36,6 +36,25 @@ export default function Home() {
     setOwner(id)
   }, [reload]);
 
+  useEffect(() => {
+    if (relation === 'Friend') {
+      setPositionX(`${(container.current.clientWidth - circle1.current.clientWidth)/1.5}px`)
+      setPositionY(`${(container.current.clientHeight - circle1.current.clientHeight)/1.5}px`)
+    }
+    if (relation === 'Hi/Hello') {
+      setPositionX(`${(container.current.clientWidth - circle2.current.clientWidth)/1.5}px`)
+      setPositionY(`${(container.current.clientHeight - circle2.current.clientHeight)/1.5}px`)
+    }
+    if (relation === 'Not Friend') {
+      setPositionX(`${(container.current.clientWidth - circle3.current.clientWidth)/1.5}px`)
+      setPositionY(`${(container.current.clientHeight - circle3.current.clientHeight)/1.5}px`)
+    }
+    if (relation === 'Enemy') {
+      setPositionX(`${(container.current.clientWidth - circle3.current.clientWidth)/3}px`)
+      setPositionY(`${(container.current.clientHeight - circle3.current.clientHeight)/3}px`)
+    }
+  }, [relation])
+
   const getData = async () => {
     let token = await getToken()
     let response = await fetch(`${process.env.HOST}api/contact`, {
@@ -52,6 +71,7 @@ export default function Home() {
   // form submission
   const handleSubmit = async (e) => {
     e.preventDefault()
+
     let response = await fetch(`${process.env.HOST}api/contact`, {
       cache: 'no-store',
       method: "POST",
@@ -74,10 +94,10 @@ export default function Home() {
       const tabLink = document.querySelectorAll('.tabLinks li')
       const tabContent = document.querySelectorAll('.tabContainer')
       tabLink.forEach(item => {
-        
+
         item.addEventListener('click', (e) => {
-         
-         
+
+
           tabContent.forEach(content => {
             if (content.getAttribute('id') === item.getAttribute('data-id')) {
               content.style.display = "block"
@@ -86,12 +106,12 @@ export default function Home() {
               content.style.display = "none"
             }
           });
-          
+
 
           tabLink.forEach(activeLink => {
-            activeLink.className=''
+            activeLink.className = ''
           })
-          item.className='active'
+          item.className = 'active'
         })
       });
     }
@@ -113,29 +133,30 @@ export default function Home() {
         <div className="circle1" data-zone="Safe" ref={circle1}></div>
         <div className="circle2" data-zone="Medium" ref={circle2}></div>
         <div className="circle3" data-zone="Warning" ref={circle3}></div>
+        {data?.success === true ?
+          data.data.map((item, index) => (
+            <UpdateContact
+              key={index}
+              old_name={item.name}
+              old_phone={item.phone}
+              old_email={item.email}
+              old_positionX={item.positionX}
+              old_positionY={item.positionY}
+              old_relation={item.relation}
+              old_id={item._id}
+              setReload={setReload}
+              reload={reload}
+              container={container}
+              circle1={circle1}
+              circle2={circle2}
+              circle3={circle3}
+            />
+          ))
+          : null}
       </div>
 
 
-      {data?.success === true ?
-        data.data.map((item, index) => (
-          <UpdateContact
-            key={index}
-            old_name={item.name}
-            old_phone={item.phone}
-            old_email={item.email}
-            old_positionX={item.positionX}
-            old_positionY={item.positionY}
-            old_relation={item.relation}
-            old_id={item._id}
-            setReload={setReload}
-            reload={reload}
-            container={container}
-            circle1={circle1}
-            circle2={circle2}
-            circle3={circle3}
-          />
-        ))
-        : null}
+
 
 
 
@@ -166,13 +187,15 @@ export default function Home() {
               <li data-id="tab1" className="active">All</li>
               <li data-id="tab2">Friends</li>
             </ul>
-            <div className="tabContainer" id="tab1" style={{display: 'block'}} >
+            <div className="tabContainer" id="tab1" style={{ display: 'block' }} >
               {data?.success === true ?
                 data.data.map((item, index) => (
                   <div key={index} className="relationBlock position-relative">
                     {item.name}<br />
                     {item.phone}<br />
                     {item.email}<br />
+                    X: {item.positionX}<br />
+                    Y: {item.positionY}<br />
                     Relation: <strong>{item.relation}</strong>
                     <div className="deleteBtn"><DeleteContact id={item._id} setReload={setReload} reload={reload} /></div>
                   </div>
@@ -182,11 +205,13 @@ export default function Home() {
             <div className="tabContainer" id="tab2">
 
               {data?.success === true ?
-                data.data.filter((contact)=>(contact.relation === 'Friend')).map((item, index) => (
+                data.data.filter((contact) => (contact.relation === 'Friend')).map((item, index) => (
                   <div key={index} className="relationBlock position-relative">
                     {item.name}<br />
                     {item.phone}<br />
                     {item.email}<br />
+                    X: {item.positionX}<br />
+                    Y: {item.positionY}<br />
                     Relation: <strong>{item.relation}</strong>
                     <div className="deleteBtn"><DeleteContact id={item._id} setReload={setReload} reload={reload} /></div>
                   </div>
