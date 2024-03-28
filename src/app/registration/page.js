@@ -38,7 +38,7 @@ export default function Page() {
             setEmail('')
             setPassword('')
             setTimeout(() => {
-                router.push('/')
+                router.push('/login')
             }, 1000)
         }
 

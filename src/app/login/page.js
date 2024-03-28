@@ -48,7 +48,7 @@ export default function Page() {
             setPassword('')
             setToken(data.token)
             setTimeout(() => {
-                router.push('/login')
+                router.push('/')
             }, 1000);
         }
 
